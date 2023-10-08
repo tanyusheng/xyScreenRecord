@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ScreenRecordService.RecordBinder recordBinder = (ScreenRecordService.RecordBinder) service;
                 ScreenRecordService screenRecordService = recordBinder.getRecordService();
                 ScreenUtil.setScreenService(screenRecordService);
+                Log.d(TAG, "onServiceConnected: 服务连接器创建成功....");
             }
 
             @Override
@@ -119,7 +120,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
-            ScreenUtil.setUpData(requestCode,data);
+            try {
+                ScreenUtil.setUpData(requestCode,data);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }else {
             ToastUtil.show(this,"拒绝录屏");
         }
@@ -131,14 +136,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(resourceId == R.id.tv_start){
             // 实现textview的点击功能
             ToastUtil.show(this,"开始录屏");
-            Log.d(TAG, "onClick: 系统开始录屏");
+            Log.d(TAG, "onClick: 触发了开始录屏按钮");
             // 启动屏幕录制
             ScreenUtil.startScreenRecord(this,REQUEST_CODE);
 
         } else if (resourceId == R.id.tv_end) {
             // 点击功能
             ToastUtil.show(this,"停止录屏");
-            Log.d(TAG, "onClick: 系统结束录屏");
+            Log.d(TAG, "onClick: 触发了结束录屏按钮");
             ScreenUtil.stopScreenRecord(this);
         }
     }

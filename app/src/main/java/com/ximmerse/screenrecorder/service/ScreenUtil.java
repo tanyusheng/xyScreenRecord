@@ -34,12 +34,9 @@ public class ScreenUtil {
      * @param requestCode 请求码
      */
     public static void startScreenRecord(Activity activity,int requestCode){
-
-        // todo 这里的录屏服务为空
-        Log.d(TAG, "startScreenRecord: "+(s_ScreenRecordService == null));
-
         if(s_ScreenRecordService != null && !s_ScreenRecordService.ismIsRunning()){
             if(!s_ScreenRecordService.isReady()){
+                Log.d(TAG, "startScreenRecord: 屏幕录制服务未准备好....");
                 // MediaPeojectionManager要求Android api 21+才可以用
                 MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) activity.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
                 if(mediaProjectionManager != null){
@@ -48,13 +45,14 @@ public class ScreenUtil {
                     if(packageManager.resolveActivity(intent,PackageManager.MATCH_DEFAULT_ONLY) != null){
                         //存在录屏授权的Activity
                         activity.startActivityForResult(intent,requestCode);
+                        Log.d(TAG, "startScreenRecord: 开启录制跳转...");
                     }else {
                         ToastUtil.show(activity,"暂时无法录制");
                     }
                 }
             }else {
                 s_ScreenRecordService.startRecord();
-                Log.d(TAG, "startScreenRecord: 屏幕录制准备完毕");
+                Log.d(TAG, "startScreenRecord: 屏幕录制服务准备完毕");
             }
         }else {
             Log.d(TAG, "startScreenRecord: 屏幕录制服务未添加");
@@ -97,10 +95,19 @@ public class ScreenUtil {
     /**
      * 用户运行录屏后，设置必要数据
      */
-    public static void setUpData(int requestCode, Intent resultData) {
+    public static void setUpData(int resultCode, Intent resultData) throws Exception{
         if(s_ScreenRecordService != null && !s_ScreenRecordService.ismIsRunning()){
-            s_ScreenRecordService.setResultData(requestCode,resultData);
-//            s_ScreenRecordService.startRecord();
+            s_ScreenRecordService.setResultData(resultCode,resultData);
+            //todo
+            s_ScreenRecordService.startRecord();
+        }
+    }
+
+    public static void onRecording(String timeTip) {
+        if(s_RecordListener.size() > 0){
+            for (RecordListener listener : s_RecordListener){
+                listener.onRecording(timeTip);
+            }
         }
     }
 

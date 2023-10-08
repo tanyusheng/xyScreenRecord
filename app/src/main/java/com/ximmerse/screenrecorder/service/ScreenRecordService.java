@@ -51,9 +51,7 @@ public class ScreenRecordService extends Service implements Handler.Callback{
 
     public static final int MSG_TYPE_COUNT_DOWN = 110;
     private VirtualDisplay mVirtualDisplay;
-    private int resultCode;
-    private Intent mResultDate;
-    private MediaProjectionManager mProjectManager;
+
 
 
     /**
@@ -73,6 +71,27 @@ public class ScreenRecordService extends Service implements Handler.Callback{
         return mMediaProjection != null && mResultData != null;
     }
 
+    public void clearRecordElement(){
+        clearAll();
+        if(mMediaRecorder != null){
+            mMediaRecorder.reset();
+            mMediaRecorder.release();
+            mMediaRecorder = null;
+        }
+        mResultData = null;
+        mIsRunning = false;
+    }
+
+    public void clearAll(){
+        if(mMediaProjection != null){
+            mMediaProjection.stop();
+            mMediaProjection = null;
+        }
+    }
+
+    /**
+     * 创建服务
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -82,6 +101,18 @@ public class ScreenRecordService extends Service implements Handler.Callback{
         mMediaRecorder = new MediaRecorder();
         // 创建handler对象
         mHandler = new Handler(Looper.getMainLooper(),this);
+    }
+
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        // 服务被异常中断后，会尝试重新启动服务
+        return START_STICKY;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Nullable
@@ -219,25 +250,47 @@ public class ScreenRecordService extends Service implements Handler.Callback{
     @Override
     public boolean handleMessage(@NonNull Message msg) {
         switch (msg.what){
-            case MSG_TYPE_COUNT_DOWN:
+            case MSG_TYPE_COUNT_DOWN: {
                 String str = null;
-                boolean enough = FileUtil.getSDFreeMemory() / (1024*1024) < 4;
-                if(enough){
+                boolean enough = FileUtil.getSDFreeMemory() / (1024 * 1024) < 4;
+                if (enough) {
                     // 系统存储空间小于4M，停止录屏
                     str = getString(R.string.record_space_tip);
                     stopRecord(str);
+                    mRecordSeconds = 0;
+                    break;
                 }
+                mRecordSeconds++;
+                int minute = 0;
+                int second = 0;
+                if (mRecordSeconds >= 60) {
+                    minute = mRecordSeconds / 60;
+                    second = mRecordSeconds % 60;
+                } else {
+                    second = mRecordSeconds;
+                }
+                ScreenUtil.onRecording("0" + minute + ":" + (second < 10 ? "0" + second : second + ""));
+
+                if (mRecordSeconds < 3 * 60) {
+                    mHandler.sendEmptyMessageDelayed(MSG_TYPE_COUNT_DOWN, 1000);
+                } else if (mRecordSeconds == 3 * 60) {
+                    str = getString(R.string.record_time_end_tip);
+                    stopRecord(str);
+                    mRecordSeconds = 0;
+                }
+                break;
+            }
         }
-        return false;
+        return true;
     }
 
-    public void setResultData(int requestCode, Intent resultData) {
-        resultCode = requestCode;
-        mResultDate = resultData;
+    public void setResultData(int resultCode, Intent resultData) {
+        mResultCode = resultCode;
+        mResultData = resultData;
 
-        mProjectManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
-        if(mProjectManager != null){
-           mMediaProjection = mProjectManager.getMediaProjection(mResultCode,mResultData);
+        mProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+        if(mProjectionManager != null){
+           mMediaProjection = mProjectionManager.getMediaProjection(mResultCode,mResultData);
         }
     }
 
