@@ -1,7 +1,5 @@
 package com.ximmerse.screenrecorder;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -14,6 +12,7 @@ import android.util.Printer;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
 
 import com.ximmerse.screenrecorder.service.ScreenRecordService;
 import com.ximmerse.screenrecorder.service.ScreenUtil;
@@ -117,11 +116,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             try {
-                ScreenUtil.setUpData(requestCode,data);
+                ScreenUtil.setUpData(resultCode,data);
             } catch (Exception e) {
                 e.printStackTrace();
             }

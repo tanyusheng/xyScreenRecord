@@ -4,10 +4,11 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.app.ActivityCompat;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+
 
 public class PermissionUtil {
     private static final String TAG = "PermissionUtil";

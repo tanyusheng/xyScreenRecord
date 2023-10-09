@@ -10,15 +10,13 @@ import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Binder;
 import android.os.Environment;
-import android.os.FileUtils;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 
 import com.ximmerse.screenrecorder.R;
 import com.ximmerse.screenrecorder.utils.CommonUtil;
@@ -115,7 +113,7 @@ public class ScreenRecordService extends Service implements Handler.Callback{
         super.onDestroy();
     }
 
-    @Nullable
+
     @Override
     public IBinder onBind(Intent intent) {
         return new RecordBinder();
@@ -237,6 +235,9 @@ public class ScreenRecordService extends Service implements Handler.Callback{
         // 设置视频帧率
         mMediaRecorder.setVideoFrameRate(20);
 
+        // ---- 使用canvas绘制一个界面并通过getSurface录制下来；
+        //mMediaRecorder.getSurface();
+
         try {
             mMediaRecorder.prepare();
         } catch (IOException e) {
@@ -248,7 +249,7 @@ public class ScreenRecordService extends Service implements Handler.Callback{
 
     // todo 处理消息待完善
     @Override
-    public boolean handleMessage(@NonNull Message msg) {
+    public boolean handleMessage(Message msg) {
         switch (msg.what){
             case MSG_TYPE_COUNT_DOWN: {
                 String str = null;
