@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder.service;
+package com.ximmerse.screenrecorder.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,6 @@ import android.util.Log;
 
 
 import com.ximmerse.screenrecorder.R;
-import com.ximmerse.screenrecorder.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;

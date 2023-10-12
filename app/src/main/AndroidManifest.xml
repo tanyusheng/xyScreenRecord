@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <!--注册服务-->
-        <service android:name=".service.ScreenRecordService"/>
+        <service android:name=".utils.ScreenRecordService"/>
     </application>
 
 </manifest>

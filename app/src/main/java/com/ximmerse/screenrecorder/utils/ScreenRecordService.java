@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder.service;
+package com.ximmerse.screenrecorder.utils;
 
 import android.app.Service;
 import android.content.Context;
@@ -19,8 +19,6 @@ import android.util.Log;
 
 
 import com.ximmerse.screenrecorder.R;
-import com.ximmerse.screenrecorder.utils.CommonUtil;
-import com.ximmerse.screenrecorder.utils.FileUtil;
 
 import java.io.File;
 import java.io.IOException;

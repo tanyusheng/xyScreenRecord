@@ -8,14 +8,12 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.util.Printer;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
 
-import com.ximmerse.screenrecorder.service.ScreenRecordService;
-import com.ximmerse.screenrecorder.service.ScreenUtil;
+import com.ximmerse.screenrecorder.utils.ScreenRecordService;
+import com.ximmerse.screenrecorder.utils.ScreenUtil;
 import com.ximmerse.screenrecorder.utils.CommonUtil;
 import com.ximmerse.screenrecorder.utils.PermissionUtil;
 import com.ximmerse.screenrecorder.utils.ToastUtil;
@@ -126,6 +124,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }else {
             ToastUtil.show(this,"拒绝录屏");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 解除服务绑定，防止内存泄漏
+        if(mServiceConnection != null){
+            unbindService(mServiceConnection);
+            mServiceConnection = null;
         }
     }
 

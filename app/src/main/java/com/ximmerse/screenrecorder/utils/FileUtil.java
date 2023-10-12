@@ -11,8 +11,6 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.ximmerse.screenrecorder.service.ScreenRecordService;
-
 import java.io.File;
 
 public class FileUtil {
