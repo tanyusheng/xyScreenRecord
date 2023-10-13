@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder.utils;
+package com.ximmerse.unityandroidbridge.screenrecorder;
 
 import android.app.Service;
 import android.content.Context;
@@ -17,12 +17,13 @@ import android.os.Message;
 import android.util.Log;
 
 
-
-import com.ximmerse.screenrecorder.R;
-
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * 记得在Manifest注册服务，否则无法启动
+ * <service android:name="com.ximmerse.unityandroidbridge.screenrecorder.ScreenRecordService"/>
+ */
 public class ScreenRecordService extends Service implements Handler.Callback{
     private static final String TAG = "ScreenRecordService";
 
@@ -254,7 +255,8 @@ public class ScreenRecordService extends Service implements Handler.Callback{
                 boolean enough = FileUtil.getSDFreeMemory() / (1024 * 1024) < 4;
                 if (enough) {
                     // 系统存储空间小于4M，停止录屏
-                    str = getString(R.string.record_space_tip);
+                    // str = getString(R.string.record_space_tip);
+                    str = "录制已经停止";
                     stopRecord(str);
                     mRecordSeconds = 0;
                     break;
@@ -273,7 +275,8 @@ public class ScreenRecordService extends Service implements Handler.Callback{
                 if (mRecordSeconds < 3 * 60) {
                     mHandler.sendEmptyMessageDelayed(MSG_TYPE_COUNT_DOWN, 1000);
                 } else if (mRecordSeconds == 3 * 60) {
-                    str = getString(R.string.record_time_end_tip);
+                    // str = getString(R.string.record_time_end_tip);
+                    str = "录制已达到指定时长";
                     stopRecord(str);
                     mRecordSeconds = 0;
                 }

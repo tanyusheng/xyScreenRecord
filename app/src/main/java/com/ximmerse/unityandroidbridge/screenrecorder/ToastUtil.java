@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder.utils;
+package com.ximmerse.unityandroidbridge.screenrecorder;
 
 import android.content.Context;
 import android.widget.Toast;

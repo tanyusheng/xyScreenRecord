@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder.utils;
+package com.ximmerse.unityandroidbridge.screenrecorder;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,8 +8,6 @@ import android.media.projection.MediaProjectionManager;
 import android.util.Log;
 
 
-import com.ximmerse.screenrecorder.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,7 @@ public class ScreenUtil {
     private static final String TAG = "ScreenUtil";
     private static ScreenRecordService s_ScreenRecordService;
 
-    private static List<RecordListener> s_RecordListener = new ArrayList<>();
+    private static List<IRecordListener> s_RecordListener = new ArrayList<>();
 
 
 
@@ -46,7 +44,7 @@ public class ScreenUtil {
                         activity.startActivityForResult(intent,requestCode);
                         Log.d(TAG, "startScreenRecord: 开启录制跳转...");
                     }else {
-                        ToastUtil.show(activity,"暂时无法录制");
+                        Log.d(TAG, "startScreenRecord: 暂时无法录制");
                     }
                 }
             }else {
@@ -61,7 +59,7 @@ public class ScreenUtil {
 
 
 
-    public static void addRecordListener(RecordListener listener){
+    public static void addRecordListener(IRecordListener listener){
         //如果监听器对象不为空，且录制监听器集合中没有这个监听器，那么就添加到录制监听器集合中
         if(listener != null && !s_RecordListener.contains(listener)){
             s_RecordListener.add(listener);
@@ -70,7 +68,7 @@ public class ScreenUtil {
 
     public static void startRecord(){
         if(s_RecordListener.size() > 0){
-            for(RecordListener listener : s_RecordListener){
+            for(IRecordListener listener : s_RecordListener){
                 listener.onStartRecord();
             }
         }
@@ -78,7 +76,7 @@ public class ScreenUtil {
 
     public static void stopRecord(String stopTip) {
         if (s_RecordListener.size() > 0){
-            for (RecordListener listener : s_RecordListener){
+            for (IRecordListener listener : s_RecordListener){
                 listener.onStopRecord(stopTip);
             }
         }
@@ -86,7 +84,8 @@ public class ScreenUtil {
 
     public static void stopScreenRecord(Context context) {
         if(s_ScreenRecordService != null && s_ScreenRecordService.ismIsRunning()){
-            String str = context.getString(R.string.stop_recording);
+            //String str = context.getString(R.string.stop_recording);
+            String str = "结束录制";
             s_ScreenRecordService.stopRecord(str);
         }
     }
@@ -104,21 +103,11 @@ public class ScreenUtil {
 
     public static void onRecording(String timeTip) {
         if(s_RecordListener.size() > 0){
-            for (RecordListener listener : s_RecordListener){
+            for (IRecordListener listener : s_RecordListener){
                 listener.onRecording(timeTip);
             }
         }
     }
 
-    /**
-     * 定义一个录屏监听器接口
-     */
-    public interface RecordListener{
-        void onStartRecord();
-        void onPauseRecord();
-        void onResumeRecord();
-        void onStopRecord(String stopTip);
-        void onRecording(String timeTip);
-    }
 
 }

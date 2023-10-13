@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder.utils;
+package com.ximmerse.unityandroidbridge.screenrecorder;
 
 import android.app.Activity;
 import android.util.DisplayMetrics;
