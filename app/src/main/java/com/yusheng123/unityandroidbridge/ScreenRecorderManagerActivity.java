@@ -1,4 +1,4 @@
-package com.ximmerse.unityandroidbridge;
+package com.yusheng123.unityandroidbridge;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,10 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ximmerse.screenrecorder.R;
-import com.ximmerse.unityandroidbridge.screenrecorder.CommonUtil;
-import com.ximmerse.unityandroidbridge.screenrecorder.ScreenRecorderManager;
-import com.ximmerse.unityandroidbridge.screenrecorder.ScreenUtil;
+import com.yusheng123.screenrecorder.R;
+import com.yusheng123.unityandroidbridge.screenrecorder.CommonUtil;
+import com.yusheng123.unityandroidbridge.screenrecorder.ScreenRecorderManager;
+import com.yusheng123.unityandroidbridge.screenrecorder.ScreenUtil;
 
 
 public class ScreenRecorderManagerActivity extends Activity {

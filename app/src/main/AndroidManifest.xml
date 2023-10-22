@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ximmerse.screenrecorder">
+    package="com.yusheng123.screenrecorder">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         >
         <activity
-            android:name="com.ximmerse.unityandroidbridge.ScreenRecorderManagerActivity"
+            android:name="com.yusheng123.unityandroidbridge.ScreenRecorderManagerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <!--注册服务-->
-        <service android:name="com.ximmerse.unityandroidbridge.screenrecorder.ScreenRecordService"/>
+        <service android:name="com.yusheng123.unityandroidbridge.screenrecorder.ScreenRecordService"/>
     </application>
 
 </manifest>

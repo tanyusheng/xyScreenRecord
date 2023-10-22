@@ -1,4 +1,4 @@
-package com.ximmerse.unityandroidbridge.screenrecorder;
+package com.yusheng123.unityandroidbridge.screenrecorder;
 
 /**
  * 录屏监听器接口

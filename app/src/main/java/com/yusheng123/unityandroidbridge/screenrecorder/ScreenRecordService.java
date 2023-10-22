@@ -1,4 +1,4 @@
-package com.ximmerse.unityandroidbridge.screenrecorder;
+package com.yusheng123.unityandroidbridge.screenrecorder;
 
 import android.app.Service;
 import android.content.Context;

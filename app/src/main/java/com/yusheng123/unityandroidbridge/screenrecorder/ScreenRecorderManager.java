@@ -1,4 +1,4 @@
-package com.ximmerse.unityandroidbridge.screenrecorder;
+package com.yusheng123.unityandroidbridge.screenrecorder;
 
 import static android.content.Context.BIND_AUTO_CREATE;
 
