@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder;
+package com.yusheng123.screenrecorder;
 
 
 import android.app.Activity;
@@ -8,17 +8,15 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.util.Printer;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
 
-import com.ximmerse.screenrecorder.service.ScreenRecordService;
-import com.ximmerse.screenrecorder.service.ScreenUtil;
-import com.ximmerse.screenrecorder.utils.CommonUtil;
-import com.ximmerse.screenrecorder.utils.PermissionUtil;
-import com.ximmerse.screenrecorder.utils.ToastUtil;
+import com.yusheng123.screenrecorder.service.ScreenRecordService;
+import com.yusheng123.screenrecorder.service.ScreenUtil;
+import com.yusheng123.screenrecorder.utils.CommonUtil;
+import com.yusheng123.screenrecorder.utils.PermissionUtil;
+import com.yusheng123.screenrecorder.utils.ToastUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "MainActivity";

@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder.utils;
+package com.yusheng123.screenrecorder.utils;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -10,8 +10,6 @@ import android.os.StatFs;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.ximmerse.screenrecorder.service.ScreenRecordService;
 
 import java.io.File;
 

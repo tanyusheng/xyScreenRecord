@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder.utils;
+package com.yusheng123.screenrecorder.utils;
 
 import android.app.Activity;
 import android.util.DisplayMetrics;

@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder.service;
+package com.yusheng123.screenrecorder.service;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,8 +8,8 @@ import android.media.projection.MediaProjectionManager;
 import android.util.Log;
 
 
-import com.ximmerse.screenrecorder.R;
-import com.ximmerse.screenrecorder.utils.ToastUtil;
+import com.yusheng123.screenrecorder.R;
+import com.yusheng123.screenrecorder.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;

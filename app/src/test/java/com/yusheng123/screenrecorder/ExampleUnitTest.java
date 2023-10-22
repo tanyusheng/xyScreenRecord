@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder;
+package com.yusheng123.screenrecorder;
 
 import org.junit.Test;
 

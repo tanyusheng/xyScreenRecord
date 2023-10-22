@@ -1,4 +1,4 @@
-package com.ximmerse.screenrecorder.utils;
+package com.yusheng123.screenrecorder.utils;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
